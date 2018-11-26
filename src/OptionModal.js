@@ -19,10 +19,11 @@ const StyledModal = Modal.styled`
 `
 
 const ModalTitle = styled.h3`
-  font-size: ${props => props.theme.textSmall}
+  font-size: ${props => props.theme.textSmall};
+  border-bottom: 1px solid ${props => props.theme.white};
 
   @media only screen and (max-width: ${props => props.theme.bpSmall}) {
-    font-size: ${props => props.theme.textMedium}
+    font-size: ${props => props.theme.textMedium};
   }
 `
 
@@ -48,7 +49,7 @@ const CloseButton = styled.button`
 
   @media only screen and (max-width: ${props => props.theme.bpSmall}) {
     padding: 0.8rem 2rem;
-    font-size: ${props => props.theme.textMedium}
+    font-size: ${props => props.theme.textMedium};
   }
 `
 
@@ -67,7 +68,7 @@ const OptionModal = (props) => (
     onBackgroundClick={props.handleModalClose}
     onEscapeKeydown={props.handleModalClose}
   >
-    <ModalTitle>Selected Option</ModalTitle>
+    <ModalTitle>I have picked</ModalTitle>
     {props.selectedOption && <Selected>{props.selectedOption}</Selected>}
     <CloseButton onClick={props.handleModalClose}>Alright</CloseButton>
   </StyledModal>

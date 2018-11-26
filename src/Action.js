@@ -15,8 +15,8 @@ const ActionButton = styled.button`
   width: 100%;
 
   @media only screen and (max-width: ${props => props.theme.bpSmall}) {
-    margin: 0;
-    padding: 1rem;
+    margin: 2rem 0;
+    padding: 2rem;
   }
   
   &:hover {
@@ -37,7 +37,7 @@ const ActionButton = styled.button`
 
 const Action = (props) => (
   <div>
-    <ActionButton onClick={props.handlePick} disabled={props.disabled}>What should I do?</ActionButton>
+    <ActionButton onClick={props.handlePick} disabled={props.disabled}>Pick an Option</ActionButton>
   </div>
 )
 

@@ -62,7 +62,7 @@ const theme = {
   textLarge: '6rem',
   textMedium: '3rem',
   textSmall: '2rem',
-  bpSmall: '32.25rem'
+  bpSmall: '500px'
 }
 
 export default class IndecisionApp extends React.Component {
@@ -86,9 +86,9 @@ export default class IndecisionApp extends React.Component {
   }
   handleAddOption = (option) => {
     if (!option) {
-      return 'Enter a valid value to add an option.';
+      return 'Enter a valid value.';
     } else if (this.state.options.indexOf(option) > -1) {
-      return 'This option is already on the list.';
+      return 'This option already exists.';
     }
 
     this.setState((prevState) => ({

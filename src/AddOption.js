@@ -25,17 +25,13 @@ const AddOptionButton = styled.button`
 const AddOptionForm = styled.form`
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
   padding: 2rem;
 
   border-top: 1px solid ${props => props.theme.white};
   background-color: ${props => props.theme.greyLight};
   position: sticky;
   bottom: 0;
-
-  @media only screen and (max-width: ${props => props.theme.bpSmall}) {
-    position: relative;
-    flex-direction: column;
-  }
 `
 
 const AddOptionField = styled.input`
@@ -51,11 +47,8 @@ const AddOptionField = styled.input`
   color: ${props => props.theme.white};
   border-bottom: 4px solid transparent;
   font-family: ${props => props.theme.fontMain};
-  
-  @media only screen and (max-width: ${props => props.theme.bpSmall}) {
-    margin-right: 0;
-    margin-bottom: 1rem;
-  }
+  margin-right: 0;
+  margin-bottom: 1rem;
 
   &:placeholder {
     color: ${props => props.theme.white};
@@ -88,7 +81,7 @@ export default class AddOption extends React.Component {
         <AddOptionField
           type="text"
           name="option"
-          placeholder={this.state.error ? this.state.error : 'Your action'}
+          placeholder={this.state.error ? this.state.error : 'Write your option here'}
         />
         <AddOptionButton>Add Option</AddOptionButton>
       </AddOptionForm>
