@@ -23,8 +23,8 @@ const Title = styled.h1`
 
 const Header = (props) => (
   <TitleWrapper>
-    <Title>{props.title}</Title>
-    {props.subtitle && <Subtitle>{props.subtitle}</Subtitle>}
+      <Title>{props.title}</Title>
+      {props.subtitle && <Subtitle>{props.subtitle}</Subtitle>}
   </TitleWrapper>
 )
 

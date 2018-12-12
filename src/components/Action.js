@@ -36,9 +36,9 @@ const ActionButton = styled.button`
 `
 
 const Action = (props) => (
-  <div>
+  <>
     <ActionButton onClick={props.handlePick} disabled={props.disabled}>Pick an Option</ActionButton>
-  </div>
+  </>
 )
 
 
