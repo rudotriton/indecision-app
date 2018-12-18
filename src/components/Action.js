@@ -18,15 +18,6 @@ const ActionButton = styled.button`
     margin: 2rem 0;
     padding: 2rem;
   }
-  
-  &:hover {
-    background-color: ${props => props.theme.secondaryColor};
-    border-bottom: 8px solid ${props => props.theme.secondaryColorDarken};
-  }
-
-  &:active {
-    transform: translateY(2px);
-  }
 
   &:disabled {
     background-color: ${props => props.theme.greyLight};

@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 const TitleWrapper = styled.div`
-  align-items: center;
   background-color: ${props => props.theme.greyDark};
   display: flex;
   flex-direction: column;
@@ -15,10 +14,12 @@ const TitleWrapper = styled.div`
 
 const Title = styled.h1`
   font-size: ${props => props.theme.textLarge};
+  text-align: center;
   `
   
   const Subtitle = styled.h2`
   font-size: ${props => props.theme.textSmall};
+  text-align: center;
 `
 
 const Header = (props) => (

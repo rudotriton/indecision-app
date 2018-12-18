@@ -25,14 +25,6 @@ const DeleteAllButton = styled.button`
   cursor: pointer;
   font-family: ${props => props.theme.fontMain};
   outline: none;
-
-  &:hover {
-    color: ${props => props.theme.secondaryColor};
-  }
-
-  &:active {
-    transform: translateY(2px);
-  }
 `
 
 const NoOptionMessage = styled.p`

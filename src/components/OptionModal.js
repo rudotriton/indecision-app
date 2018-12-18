@@ -38,15 +38,6 @@ const CloseButton = styled.button`
   outline: none;
   font-family: ${props => props.theme.fontMain};
 
-  &:hover {
-    background-color: ${props => props.theme.secondaryColor};
-    border-bottom: 0.4rem solid ${props => props.theme.secondaryColorDarken};
-  }
-
-  &:active {
-    transform: translateY(2px);
-  }
-
   @media only screen and (max-width: ${props => props.theme.bpSmall}) {
     padding: 0.8rem 2rem;
     font-size: ${props => props.theme.textMedium};

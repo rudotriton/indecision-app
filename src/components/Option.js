@@ -25,14 +25,6 @@ const RemoveButton = styled.button`
   font-family: ${props => props.theme.fontMain};
   outline: none;
 
-  &:hover {
-    color: ${props => props.theme.secondaryColor};
-  }
-
-  &:active {
-    transform: translateY(2px);
-  }
-
   @media only screen and (max-width: ${props => props.theme.bpSmall}) {
     min-width: 7rem;
   }

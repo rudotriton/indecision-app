@@ -11,15 +11,6 @@ const AddOptionButton = styled.button`
   background-color: ${props => props.theme.primaryColor};
   outline: none;
   font-family: $font-main;
-
-  &:hover {
-    background-color: ${props => props.theme.secondaryColor};
-    border-bottom: 0.4rem solid ${props => props.theme.secondaryColorDarken};
-  }
-
-  &:active {
-    transform: translateY(2px);
-  }
 `
 
 const AddOptionForm = styled.form`

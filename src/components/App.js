@@ -4,7 +4,7 @@ import Options from './Options';
 import Header from './Header';
 import Action from './Action';
 import OptionModal from './OptionModal';
-import { ModalProvider } from 'styled-react-modal';
+import { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 
 const AppWrapper = styled.div`
@@ -23,8 +23,8 @@ const GlobalStyle = createGlobalStyle`
     font-size: 62.5%;
 
     @media only screen and (max-width: ${props => props.theme.bpSmall}) {
-      // font-size: 56.25%;
-      font-size: 40%;
+      font-size: 56.25%;
+      // font-size: 40%;
     }
   }
 
@@ -64,6 +64,10 @@ const theme = {
   textSmall: '2rem',
   bpSmall: '500px'
 }
+
+const SpecialModalBackground = styled(BaseModalBackground)`
+  background-color: rgba(0,0,0,0.8);
+`
 
 export default class IndecisionApp extends React.Component {
   state = {
@@ -121,7 +125,7 @@ export default class IndecisionApp extends React.Component {
     return (
       <ThemeProvider theme={theme}>
         <AppWrapper>
-          <ModalProvider>
+          <ModalProvider backgroundComponent={SpecialModalBackground}>
           <GlobalStyle />
             <Header
               subtitle={subtitle}
