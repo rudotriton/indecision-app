@@ -1,30 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { ModalProvider, BaseModalBackground } from 'styled-react-modal';
+import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import AddOption from './AddOption';
 import Options from './Options';
 import Header from './Header';
 import Action from './Action';
 import OptionModal from './OptionModal';
-import { ModalProvider, BaseModalBackground } from 'styled-react-modal';
-import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 
 const AppWrapper = styled.div`
   max-width: 60rem;
   margin: 0 auto;
   padding: 0 2rem;
 
-  @media only screen and (max-width: ${props => props.theme.bpSmall}) {
+  @media only screen and (max-width: ${(props) => props.theme.bpSmall}) {
     padding: 0;
   }
-`
+`;
 
 const GlobalStyle = createGlobalStyle`
   html {
     box-sizing: border-box;
     font-size: 62.5%;
 
-    @media only screen and (max-width: ${props => props.theme.bpSmall}) {
+    @media only screen and (max-width: ${(props) => props.theme.bpSmall}) {
       font-size: 56.25%;
-      // font-size: 40%;
     }
   }
 
@@ -40,8 +39,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    color: ${props => (props.theme.white)};
-    font-family: ${props => (props.theme.fontMain)};
+    color: ${(props) => (props.theme.white)};
+    font-family: ${(props) => (props.theme.fontMain)};
 
     background: #000;
     background: linear-gradient(to bottom, $color-tertiary 0%, rgb(97, 0, 92) 100%);
@@ -49,7 +48,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100vh;
     position: relative;
   }
-`
+`;
 const theme = {
   primaryColor: 'rgb(131, 58, 180)',
   primaryColorDarken: 'rgb(104,46,141)',
@@ -62,97 +61,90 @@ const theme = {
   textLarge: '6rem',
   textMedium: '3rem',
   textSmall: '2rem',
-  bpSmall: '500px'
-}
+  bpSmall: '500px',
+};
 
 const SpecialModalBackground = styled(BaseModalBackground)`
   background-color: rgba(0,0,0,0.8);
-`
+`;
 
-export default class IndecisionApp extends React.Component {
-  state = {
-    options: this.props.options,
-    selectedOption: undefined
-  }
-  handleDeleteOptions = () => {
-    this.setState(() => ({
-      options: []
-    }));
-  }
-  handleDeleteOption = (optionToRemove) => {
-    this.setState((prevState) => ({
-      options: prevState.options.filter(option => option !== optionToRemove)
-    }))
-  }
-  handlePick = () => {
-    this.setState(() =>({
-      selectedOption: this.state.options[Math.floor(Math.random() * this.state.options.length)]}));
-  }
-  handleAddOption = (option) => {
+const App = () => {
+  const [options, setOptions] = useState([]);
+  const [selected, setSelected] = useState('');
+
+  const handleDeleteOptions = () => {
+    setOptions([]);
+  };
+
+  const handleDeleteOption = (optionToRemove) => {
+    setOptions(options.filter((option) => option !== optionToRemove));
+  };
+
+  const handlePick = () => {
+    setSelected(options[Math.floor(Math.random() * options.length)]);
+  };
+
+  const handleModalClose = () => {
+    setSelected('');
+  };
+
+  const handleAddOption = (option) => {
     if (!option) {
       return 'Enter a valid value.';
-    } else if (this.state.options.indexOf(option) > -1) {
+    } if (options.indexOf(option) > -1) {
       return 'This option already exists.';
     }
 
-    this.setState((prevState) => ({
-      options: prevState.options.concat(option)
-    }));
-  }
-  handleModalClose = () => {
-    this.setState(() => ({selectedOption: undefined}))
-  }
-  componentDidMount = () => {
+    setOptions(options.concat(option));
+
+    return 'Write your option here';
+  };
+
+  useEffect(() => {
     try {
       const json = localStorage.getItem('options');
-      const options = JSON.parse(json);
+      const storedOptions = JSON.parse(json);
 
-      if (options) {
-        this.setState(() => ({ options }));
+      if (storedOptions) {
+        setOptions(storedOptions);
       }
     } catch (e) {
-      //do nothing
+      // do nothing
     }
-  }
-  componentDidUpdate = (prevProps, prevState) => {
-    if (prevState.options.length !== this.state.options.length) {
-      const json = JSON.stringify(this.state.options);
-      localStorage.setItem('options', json);
-    }
-  }
-  render() {
-    const subtitle = 'Put your life in the hands of a computer';
-    return (
-      <ThemeProvider theme={theme}>
-        <AppWrapper>
-          <ModalProvider backgroundComponent={SpecialModalBackground}>
-          <GlobalStyle />
-            <Header
-              subtitle={subtitle}
-            />
-            <Action
-              disabled={this.state.options.length === 0}
-              handlePick={this.handlePick}
-            />
-            <Options
-              options={this.state.options}
-              handleDeleteOptions={this.handleDeleteOptions}
-              handleDeleteOption={this.handleDeleteOption}
-            />
-            <AddOption
-              handleAddOption={this.handleAddOption}
-            />
-            <OptionModal
-              selectedOption={this.state.selectedOption}
-              handleModalClose={this.handleModalClose}
-            />
-          </ModalProvider>
-        </AppWrapper>
-      </ThemeProvider>
-    )
-  }
-}
+  }, []);
 
-IndecisionApp.defaultProps = {
-  options: []
+  useEffect(() => {
+    const json = JSON.stringify(options);
+    localStorage.setItem('options', json);
+  }, [options]);
+
+  return (
+    <ThemeProvider theme={theme}>
+      <AppWrapper>
+        <ModalProvider backgroundComponent={SpecialModalBackground}>
+          <GlobalStyle />
+          <Header />
+          <Action
+            disabled={options.length === 0}
+            handlePick={handlePick}
+          />
+          <Options
+            options={options}
+            handleDeleteOptions={handleDeleteOptions}
+            handleDeleteOption={handleDeleteOption}
+          />
+          <AddOption
+            handleAddOption={handleAddOption}
+          />
+          <OptionModal
+            selectedOption={selected}
+            handleModalClose={handleModalClose}
+          />
+        </ModalProvider>
+      </AppWrapper>
+    </ThemeProvider>
+  );
 };
+
+
+export default App;
